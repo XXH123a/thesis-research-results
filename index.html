@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>熊香回的学术主页 - 莼菜基因组破译研究成果展示</title>
+    <title>熊香回的硕士学位论文研究结果展示</title>
     <style>
         :root {
             --primary-color: #006B54;
@@ -96,7 +96,7 @@
         /* 22 张核心成果图片画廊（科学网格布局） */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 更紧凑的网格，适合展示多图 */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
         }
         .gallery-item {
@@ -104,7 +104,7 @@
             border-radius: 6px;
             overflow: hidden;
             background: #fff;
-            cursor: zoom-in; /* 提示可以点击放大 */
+            cursor: zoom-in;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .gallery-item:hover {
@@ -123,7 +123,7 @@
         .gallery-img-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* 确保图表不被裁剪 */
+            object-fit: contain;
             padding: 8px;
         }
         .gallery-info {
@@ -163,7 +163,7 @@
             background-color: var(--accent-color);
         }
 
-        /* ================= 原生轻量级灯箱大图查看器 ================= */
+        /* 原生大图查看器 */
         .lightbox {
             display: none;
             position: fixed;
@@ -194,7 +194,6 @@
             cursor: pointer;
         }
 
-        /* 响应式调整 */
         @media (max-width: 600px) {
             header {
                 flex-direction: column;
@@ -226,8 +225,8 @@
                 <img src="c1bcaa3807e52649c92f1ac41d5a9b3f.png" alt="海南大学">
             </div>
             <div class="header-text">
-                <h1>熊香回的学术成果展示主页</h1>
-                <p>海南大学 · 植物基因组学与生物信息学硕士研究成果</p>
+                <h1>熊香回的硕士学位论文研究结果展示</h1>
+                <p>研究方向：植物基因组学与生物信息学</p>
                 <p style="margin-top: 5px; font-weight: 600; color: var(--primary-color);">📧 联络邮箱：xiongxh2026@163.com</p>
             </div>
         </div>
@@ -236,19 +235,18 @@
         </div>
     </header>
 
-    <!-- 一、研究结果图片展示区 (22 张图片全自动加载，无需繁琐说明) -->
+    <!-- 一、研究结果图片展示区 -->
     <section>
         <h2>📊 学位论文研究图表画廊 (点击任意图片可查看高清原图)</h2>
         <p style="font-size: 13px; color: #666; margin-bottom: 15px;">此处展示了论文中的关键定量结果图表，包括染色体级基因组组装、多倍化演化、蛋白质同源建模及转录调控等核心成果：</p>
         
-        <!-- 容器：JS 会自动将 22 张图填入这个网格中 -->
         <div class="gallery-grid" id="galleryGrid"></div>
     </section>
 
-    <!-- 二、论文及研究报告 PDF 在线阅读 -->
+    <!-- 二、论文及研究报告 PDF 在线阅读（文案已优化） -->
     <section>
-        <h2>📄 学位论文与研究报告在线阅读</h2>
-        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">您可以在下方直接滑动翻阅《莼菜基因组破译与胶质多糖合成相关基因的挖掘》的研究简报及学术论文PDF。若加载缓慢，可点击下方按钮直接下载：</p>
+        <h2>📄 学位论文摘要</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">您可以在下方直接滑动翻阅《莼菜基因组破译与胶质多糖合成相关基因的挖掘》的摘要。若加载缓慢，可点击下方按钮直接下载：</p>
         
         <!-- PDF 在线阅读视窗 -->
         <div class="pdf-viewer-container">
@@ -262,20 +260,17 @@
 
 </div>
 
-<!-- 原生灯箱大图查看器 DOM -->
+<!-- 灯箱大图查看器 -->
 <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
     <img id="lightboxImg" src="" alt="高清大图">
 </div>
 
-<!-- ================= 自动加载 22 张图片与交互控制的轻量级脚本 ================= -->
 <script>
     const galleryGrid = document.getElementById('galleryGrid');
-    
-    /* ⚠️ 格式提示：如果您在 images 里的图片格式是 .jpg 或 .jpeg，请把下方的 '.png' 改为您的格式 */
     const imgExt = '.png'; 
 
-    // 1. 全自动渲染 Fig1 到 Fig19
+    // 1. 全自动渲染 Fig1 到 Fig19 (不补零原生顺序)
     for (let i = 1; i <= 19; i++) {
         const item = document.createElement('div');
         item.className = 'gallery-item';
@@ -305,7 +300,7 @@
         galleryGrid.appendChild(item);
     }
 
-    // 3. 原生灯箱放大缩小控制逻辑
+    // 3. 灯箱大图控制
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
 
