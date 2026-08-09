@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熊香回的学术主页 - 莼菜基因组破译研究成果展示</title>
+    <style>
+        :root {
+            --primary-color: #006B54;
+            --text-color: #333333;
+            --bg-color: #f7f9f8;
+            --card-bg: #ffffff;
+            --light-bg: #eef5f2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 头部学术名片 */
+        header {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header-logo img {
+            height: 60px;
+            width: auto;
+        }
+        .header-text {
+            border-left: 2px solid #ddd;
+            padding-left: 20px;
+        }
+        .header-text h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .header-text p {
+            font-size: 14px;
+            color: #666;
+        }
+        .header-photo img {
+            width: 65px;
+            height: 86px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        /* 大版块样式 */
+        section {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--primary-color);
+            font-size: 18px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 22 张核心成果图片画廊（科学网格布局） */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 更紧凑的网格，适合展示多图 */
+            gap: 20px;
+        }
+        .gallery-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #fff;
+            cursor: zoom-in; /* 提示可以点击放大 */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        }
+        .gallery-img-container {
+            width: 100%;
+            height: 160px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .gallery-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 确保图表不被裁剪 */
+            padding: 8px;
+        }
+        .gallery-info {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid #f1f5f9;
+            background-color: #fafbfc;
+        }
+        .gallery-info h3 {
+            font-size: 13px;
+            color: #444;
+            font-weight: 600;
+        }
+
+        /* PDF 在线阅读区域 */
+        .pdf-viewer-container {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .pdf-fallback-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .pdf-fallback-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* ================= 原生轻量级灯箱大图查看器 ================= */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .header-left {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .header-text {
+                border-left: none;
+                padding-left: 0;
+            }
+            iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 学术名片头部 -->
+    <header>
+        <div class="header-left">
+            <div class="header-logo">
+                <img src="c1bcaa3807e52649c92f1ac41d5a9b3f.png" alt="海南大学">
+            </div>
+            <div class="header-text">
+                <h1>熊香回的学术成果展示主页</h1>
+                <p>海南大学 · 植物基因组学与生物信息学硕士研究成果</p>
+                <p style="margin-top: 5px; font-weight: 600; color: var(--primary-color);">📧 联络邮箱：xiongxh2026@163.com</p>
+            </div>
+        </div>
+        <div class="header-photo">
+            <img src="ad85a47e13547d7e0dc5555fbeb3db48.jpg" alt="证件照">
+        </div>
+    </header>
+
+    <!-- 一、研究结果图片展示区 (22 张图片全自动加载，无需繁琐说明) -->
+    <section>
+        <h2>📊 学位论文研究图表画廊 (点击任意图片可查看高清原图)</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">此处展示了论文中的关键定量结果图表，包括染色体级基因组组装、多倍化演化、蛋白质同源建模及转录调控等核心成果：</p>
+        
+        <!-- 容器：JS 会自动将 22 张图填入这个网格中 -->
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- 二、论文及研究报告 PDF 在线阅读 -->
+    <section>
+        <h2>📄 学位论文与研究报告在线阅读</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">您可以在下方直接滑动翻阅《莼菜基因组破译与胶质多糖合成相关基因的挖掘》的研究简报及学术论文PDF。若加载缓慢，可点击下方按钮直接下载：</p>
+        
+        <!-- PDF 在线阅读视窗 -->
+        <div class="pdf-viewer-container">
+            <iframe src="pdf/thesis_summary.pdf" width="100%" height="650px" style="border: none;"></iframe>
+        </div>
+
+        <a href="pdf/thesis_summary.pdf" download class="pdf-fallback-btn">
+            💾 下载 PDF 完整报告 / 论文
+        </a>
+    </section>
+
+</div>
+
+<!-- 原生灯箱大图查看器 DOM -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" src="" alt="高清大图">
+</div>
+
+<!-- ================= 自动加载 22 张图片与交互控制的轻量级脚本 ================= -->
+<script>
+    const galleryGrid = document.getElementById('galleryGrid');
+    
+    /* ⚠️ 格式提示：如果您在 images 里的图片格式是 .jpg 或 .jpeg，请把下方的 '.png' 改为您的格式 */
+    const imgExt = '.png'; 
+
+    // 1. 全自动渲染 Fig1 到 Fig19
+    for (let i = 1; i <= 19; i++) {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `
+            <div class="gallery-img-container">
+                <img src="images/Fig${i}${imgExt}" alt="Fig${i}" loading="lazy">
+            </div>
+            <div class="gallery-info">
+                <h3>Figure ${i}</h3>
+            </div>
+        `;
+        galleryGrid.appendChild(item);
+    }
+
+    // 2. 全自动渲染 GT_express_part1, 2, 3
+    for (let i = 1; i <= 3; i++) {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `
+            <div class="gallery-img-container">
+                <img src="images/GT_express_part${i}${imgExt}" alt="GT_express_part${i}" loading="lazy">
+            </div>
+            <div class="gallery-info">
+                <h3>GT_express Part ${i}</h3>
+            </div>
+        `;
+        galleryGrid.appendChild(item);
+    }
+
+    // 3. 原生灯箱放大缩小控制逻辑
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    galleryGrid.addEventListener('click', (e) => {
+        const clickedImg = e.target.closest('img');
+        if (clickedImg) {
+            lightboxImg.src = clickedImg.src;
+            lightbox.style.display = 'flex';
+        }
+    });
+
+    lightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
