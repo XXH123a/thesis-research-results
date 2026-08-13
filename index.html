@@ -11,6 +11,7 @@
             --bg-color: #f7f9f8;
             --card-bg: #ffffff;
             --light-bg: #eef5f2;
+            --accent-color: #00876a;
         }
 
         * {
@@ -145,6 +146,86 @@
             overflow: hidden;
         }
 
+        /* 纯 CSS 流程图样式 */
+        .flowchart-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 6px;
+            border: 1.5px solid var(--primary-color);
+            margin-bottom: 25px;
+        }
+        .flow-step {
+            flex: 1;
+            min-width: 150px;
+            background: #fff;
+            border: 1.5px solid var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .flow-step h4 {
+            font-size: 13px;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        .flow-step p {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.2;
+        }
+        .flow-arrow {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 三大作物算法网格样式 */
+        .crop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .crop-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 20px;
+            background: #fff;
+            border-top: 3.5px solid var(--primary-color);
+            transition: transform 0.2s;
+        }
+        .crop-card:hover {
+            transform: translateY(-3px);
+        }
+        .crop-card h3 {
+            font-size: 15px;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .crop-detail {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.5;
+            list-style-type: square;
+            margin-left: 15px;
+        }
+        .crop-detail li {
+            margin-bottom: 6px;
+        }
+
         /* 原生大图查看器 */
         .lightbox {
             display: none;
@@ -190,6 +271,13 @@
                 border-left: none;
                 padding-left: 0;
             }
+            .flowchart-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
             iframe {
                 height: 400px;
             }
@@ -217,7 +305,7 @@
         </div>
     </header>
 
-    <!-- 一、研究结果图片展示区 -->
+    <!-- 1. 研究结果图片展示区（展示手头功夫） -->
     <section>
         <h2>📊 学位论文研究图表画廊 (点击任意图片可查看高清原图)</h2>
         <p style="font-size: 13px; color: #666; margin-bottom: 15px;">此处展示了论文中的关键定量结果图表，包括染色体级基因组组装、多倍化演化、蛋白质同源建模及转录调控等核心成果：</p>
@@ -225,7 +313,7 @@
         <div class="gallery-grid" id="galleryGrid"></div>
     </section>
 
-    <!-- 二、论文及研究报告 PDF 在线阅读 -->
+    <!-- 2. 论文及研究报告 PDF 在线阅读（已调整至第二板块，展示完整科研闭环） -->
     <section>
         <h2>📄 学位论文摘要</h2>
         <p style="font-size: 13px; color: #666; margin-bottom: 15px;">您可以在下方直接滑动翻阅《莼菜基因组破译与胶质多糖合成相关基因的挖掘》的摘要。</p>
@@ -235,6 +323,174 @@
             <iframe src="pdf/thesis_summary.pdf" width="100%" height="650px" style="border: none;"></iframe>
         </div>
     </section>
+
+    <!-- 3. 2.1板块：智能育种4.0平台算法落地架构（展示算法深度） -->
+    <section>
+        <h2>🚀 智能育种 4.0 平台算法落地架构 (针对特定作物优化设计)</h2>
+        
+        <!-- 算法流程图 -->
+        <div class="flowchart-container">
+            <div class="flow-step">
+                <h4>1. 高吞吐数据预处理</h4>
+                <p>基因型HDF5格式存储，表型PostgreSQL库关联，Hail快速过滤与插补。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+                <h4>2. GWAS 显著位点定位</h4>
+                <p>GEMMA/FarmCPU算法并行加速，排除群体分化，精细定位性状主效QTL区间。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+                <h4>3. GS 多模型集成预测</h4>
+                <p>加性GBLUP+主效BayesB+非线性神经网络，多算法权重融合得出 GEBV 值。</p>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+                <h4>4. 专利亲本组配优化</h4>
+                <p>基于专利CN119252321B，实现缺陷表型靶向改良推荐与后代分离方差预测。</p>
+            </div>
+        </div>
+
+        <!-- 三大作物算法优化网格 -->
+        <div class="crop-grid">
+            <div class="crop-card">
+                <h3>🌾 小麦算法优化定位 (6x=AABBDD, ~16Gb)</h3>
+                <ul class="crop-detail">
+                    <li><strong>比对质量控制：</strong>针对异源六倍体亚基因组序列同源冲突，比对模块强制过滤限制MAPQ>=30，消除噪声Reads。</li>
+                    <li><strong>基因型标记降维：</strong>鉴于小麦LD衰减极慢，在GWAS与GS前进行Tag-SNP特征提取过滤（控制在50k以内），打破算力瓶颈。</li>
+                    <li><strong>fgBLUP 纯加性模型：</strong>针对自交DH/RIL自交纯系材料，排除非加性效应。运行fgBLUP模型，将主效春化基因Vrn与抗病基因Fhb1作为固定效应代入。</li>
+                </ul>
+            </div>
+            <div class="crop-card">
+                <h3>🌽 玉米算法优化定位 (2x=20, ~2.3Gb)</h3>
+                <ul class="crop-detail">
+                    <li><strong>图形泛基因组构建：</strong>针对高差异、高非共享基因组特征，构建玉米Graph-pangenome，精准提取大片段结构变异(SVs)。</li>
+                    <li><strong>特定配合力(SCA)预测：</strong>玉米为异交F1杂交种，需同时预测GCA与SCA。算法在GS模型中引入显性效应D矩阵，并利用LightGBM模型等捕捉非线性非加性上位效应。</li>
+                    <li><strong>亲本组配优势限制：</strong>在亲本匹配推荐算法中绑定杂种优势群（如Reid与Lancaster）约束矩阵，强制群间杂交。</li>
+                </ul>
+            </div>
+            <div class="crop-card">
+                <h3>🥒 黄瓜算法优化定位 (2x=14, ~350Mb)</h3>
+                <ul class="crop-detail">
+                    <li><strong>低成本轻量级芯片：</strong>基因组小且多态性低，平台适配5k-10k的低密度芯片即可捕获全基因组变异，极大地压缩企业日常育种检测成本。</li>
+                    <li><strong>非参数贝叶斯 BayesB 预测：</strong>黄瓜关键品质性状（如果实硬度、全雌性）属于主效寡基因控制。GS模型自动调高BayesB预测权重。</li>
+                    <li><strong>主效基因固定化：</strong>将全雌位点F和苦味基因Bi等作为固定效应强制代入Bayes模型，显著提升品质预测准确率。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 2.2板块：商业化液相育种芯片多场景开发（展示商业化落地） -->
+    <section>
+        <h2>🧬 商业化液相育种芯片多场景开发 (基于 GBTS 靶向捕获技术)</h2>
+        
+        <!-- 液相芯片研发流程图 -->
+        <div class="flowchart-container" style="border-color: var(--accent-color); background-color: #fafbfc;">
+            <div class="flow-step" style="border-color: var(--accent-color); border-left-color: var(--accent-color);">
+                <h4>1. 核心标记筛选</h4>
+                <p>提取大规模重测序群体变异，筛选高度多态性、高完整度、遗传效应强的核心SNP/InDel。</p>
+            </div>
+            <div class="flow-arrow" style="color: var(--accent-color);">➔</div>
+            <div class="flow-step" style="border-color: var(--accent-color); border-left-color: var(--accent-color);">
+                <h4>2. 液相探针设计与质控</h4>
+                <p>基于极智专利CN120032712B，进行探针特异性与捕获效率评估，规避高重复区及错配噪声。</p>
+            </div>
+            <div class="flow-arrow" style="color: var(--accent-color);">➔</div>
+            <div class="flow-step" style="border-color: var(--accent-color); border-left-color: var(--accent-color);">
+                <h4>3. 多场景柔性芯片交付</h4>
+                <p>针对不同检测预算与育种阶段，柔性定制高、中、低通量液相芯片，打通MAS与GS检测流程。</p>
+            </div>
+        </div>
+
+        <!-- 三大作物场景化解决方案（并列排版） -->
+        <div class="crop-grid">
+            <!-- 小麦芯片 -->
+            <div class="crop-card" style="border-top-color: var(--accent-color);">
+                <h3 style="color: var(--accent-color);">🌾 小麦场景化芯片方案</h3>
+                <ul class="crop-detail">
+                    <li><strong>亲本资源评估与变异发现（50k-90k高通量芯片）：</strong>用于核质种质资源亲缘关系鉴定、骨架图谱构建及新功能变异（SNP）库挖掘。</li>
+                    <li><strong>强/弱筋品质与丰产性预测（10k-20k中通量芯片）：</strong>针对麦谷蛋白亚基(<i>Glu-1</i>等)、淀粉质量、千粒重(<i>TaGW2</i>等)及发育基因，用于自交DH/RIL早期世代加性效应GS预测。</li>
+                    <li><strong>赤霉病与条锈病极低成本MAS（1k-3k靶向芯片）：</strong>集成抗赤霉病主效QTL(<i>Fhb1</i>)、抗条锈病(<i>Yr18/Yr36</i>)及矮秆等主效标记，专用于大群体大田性状快速初筛。</li>
+                </ul>
+            </div>
+            <!-- 玉米芯片 -->
+            <div class="crop-card" style="border-top-color: var(--accent-color);">
+                <h3 style="color: var(--accent-color);">🌽 玉米场景化芯片方案</h3>
+                <ul class="crop-detail">
+                    <li><strong>商品种F1纯度与真实性鉴定（1k-2k极简芯片）：</strong>精选全基因组高多态性核心SNP变异，支持商品杂交种纯度快速质控与品种保护(DUS测试)。</li>
+                    <li><strong>青贮品质与抗倒伏双重改良（10k-20k中通量芯片）：</strong>集成控制次生细胞壁木质素/纤维素合成(<i>Bm</i>突体等)及生物量、淀粉含量主效位点，用于自交系早期多模型GS选择。</li>
+                    <li><strong>抗旱耐密植广谱抗逆群体快速筛查（5k-10k液相芯片）：</strong>筛选玉米根系构型(<i>Rt</i>基因)、气孔保水及耐密植相关功能变异，作为抗逆胁迫下快速淘汰不良单株的高效工具。</li>
+                </ul>
+            </div>
+            <!-- 黄瓜芯片 -->
+            <div class="crop-card" style="border-top-color: var(--accent-color);">
+                <h3 style="color: var(--accent-color);">🥒 黄瓜场景化芯片方案</h3>
+                <ul class="crop-detail">
+                    <li><strong>全雌与高品质杂交后代超前预测（5k-10k轻量级芯片）：</strong>针对全雌位点(<i>F</i>)、苦味(<i>Bi</i>)及果实硬度等，利用小规模探针在幼苗期高精度预测杂交后代瓜条品质。</li>
+                    <li><strong>设施栽培广谱抗病复合抗性筛选（2k-3k靶向芯片）：</strong>靶向集成控制白粉病(<i>mlo</i>)、霜霉病及黄瓜花叶病毒(CMV)的抗性主效标记，一键筛查育种群体的抗病家系。</li>
+                    <li><strong>高端园艺种子真伪与KASP复合质控（500-1000靶向芯片）：</strong>筛选核心高分化标记开发为KASP(多重荧光检测)或极低成本靶向捕获系统，为高单价黄瓜种子出厂提供超高性价比纯度保障。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 2.3板块：可解释性智能设计育种平台升级（展示最前沿产品力） -->
+    <section>
+        <h2>🔬 可解释性智能设计育种平台升级 (基于 GMP 基因通路先验与 Cytoscape.js 交互)</h2>
+        
+        <!-- 闭环交互流程图 -->
+        <div class="flowchart-container" style="border-color: #6152a5; background-color: #f7f6fb;">
+            <div class="flow-step" style="border-color: #6152a5; border-left-color: #6152a5;">
+                <h4>1. 后端：GMP 基因先验加权</h4>
+                <p>将UGE、NST与GT92基因作为半乳聚糖合成通路特征集，在GS融合预测中赋予高先验权重，计算高精度GEBV值。</p>
+            </div>
+            <div class="flow-arrow" style="color: #6152a5;">➔</div>
+            <div class="flow-step" style="border-color: #6152a5; border-left-color: #6152a5;">
+                <h4>2. 后端：PCC 极速矩阵计算</h4>
+                <p>基于后台组织RNA-seq表达量，利用R语言cor()或Python的corr()毫秒级计算通路两两基因的皮尔森相关系数。</p>
+            </div>
+            <div class="flow-arrow" style="color: #6152a5;">➔</div>
+            <div class="flow-step" style="border-color: #6152a5; border-left-color: #6152a5;">
+                <h4>3. 前端：Cytoscape.js 交互调控</h4>
+                <p>前端动态加载Cytoscape.js组件渲染调控网络图，支持一键高亮调控通路，决策路径完全透明、科学、可视化。</p>
+            </div>
+        </div>
+
+        <!-- 三大作物 GMP 调控网络落地设想 -->
+        <div class="crop-grid">
+            <!-- 小麦品质与抗倒伏调控 -->
+            <div class="crop-card" style="border-top-color: #6152a5;">
+                <h3 style="color: #6152a5;">🌾 小麦 GMP 通路调控设想</h3>
+                <ul class="crop-detail">
+                    <li><strong>主效调控节点高亮：</strong>分析TaGALS1基因与上游TaUGE、TaNST的皮尔森相关系数网络，评估胚乳细胞壁果胶品质合成效率。</li>
+                    <li><strong>抗倒伏关联：</strong>将PCC显著正相关的基因簇作为“协同表达单元”引入小麦抗折弯GS预测模型，解决巨型基因组多等位标记掩盖主效通路的问题。</li>
+                </ul>
+            </div>
+            <!-- 玉米茎秆强度调控 -->
+            <div class="crop-card" style="border-top-color: #6152a5;">
+                <h3 style="color: #6152a5;">🌽 玉米 GMP 通路调控设想</h3>
+                <ul class="crop-detail">
+                    <li><strong>SCA 与非加性网络解耦：</strong>计算ZmNST1与ZmUGE、ZmGALS1在茎秆发育过程中的时空共表达网络。</li>
+                    <li><strong>杂种优势互补预测：</strong>通过前端Cytoscape.js直观高亮展示双亲在“合成-输送-装配”整条通路上的互补协同度，一键智能推荐高韧性杂交组合。</li>
+                </ul>
+            </div>
+            <!-- 黄瓜品质耐储调控 -->
+            <div class="crop-card" style="border-top-color: #6152a5;">
+                <h3 style="color: #6152a5;">🥒 黄瓜 GMP 通路调控设想</h3>
+                <ul class="crop-detail">
+                    <li><strong>果实硬度通路追踪：</strong>计算CsGALS1与果实发育关键转录因子(如CsBPC2)、CsUGE、CsNST的皮尔森网络。</li>
+                    <li><strong>单倍型功能验证：</strong>在前端网络图上点击CsGALS1，网页自动呈现与其强协同的CsUGE1优异单倍型。以此快速评估黄瓜果皮采后硬度与储运性状。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 尾部作品集超链接 -->
+    <footer>
+        <a href="https://xxh123a.github.io/thesis-research-results/" target="_blank" class="portfolio-link">
+            🔗 学位论文研究结果展示:https://xxh123a.github.io/thesis-research-results/
+        </a>
+    </footer>
 
 </div>
 
@@ -248,7 +504,7 @@
     const galleryGrid = document.getElementById('galleryGrid');
     const imgExt = '.png'; 
 
-    // 1. 全自动渲染 Fig1 到 Fig20 (不补零原生顺序，上限已更新为 20)
+    // 1. 全自动渲染 Fig1 到 Fig20 (上限已更新为 20，确保 23 张大图完整渲染)
     for (let i = 1; i <= 20; i++) {
         const item = document.createElement('div');
         item.className = 'gallery-item';
